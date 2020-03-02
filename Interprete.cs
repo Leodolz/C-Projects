@@ -11,8 +11,6 @@ namespace AgendaApp
     {
         Agenda_Ayudante ayudante = new Agenda_Ayudante();
 
-        public bool LocalTime { get; private set; }
-
         public bool comando(string entrada)
         {
             if (entrada.StartsWith("ADD"))
@@ -67,35 +65,16 @@ namespace AgendaApp
 
         private int reconocerComando(string textoIni)
         {
-            ArrayList formatosFecha = new ArrayList {"/","-"};
-            ArrayList formatosHora = new ArrayList { ":"};
+            ArrayList formatosFecha = new ArrayList {"dd/MM/yyyy","dd-MM-yyyy"};
             foreach(string formato in formatosFecha)
             {
-                if (textoIni.Split(formato).Length==3)
-                {
                     DateTime date;
-                    if (DateTime.TryParseExact(textoIni, "dd"+formato+"MM"+formato+"yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                    if (DateTime.TryParseExact(textoIni, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                         return 1; // Es Fecha
-                    //else if (DateTime.TryParseExact(textoIni, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                      //  return 1;
-                }
             }
-            foreach (string formato in formatosHora)
-            {
-                string[] hhmmss = textoIni.Split(formato);
-                if (hhmmss.Length > 1 && hhmmss.Length<4)
-                {
-                    foreach(string numero in hhmmss)
-                    {
-                        if (numero == hhmmss[0])
-                            if (!revisarNumero(numero, true))
-                                return -1;
-                            if(!revisarNumero(numero, false))
-                                return -1;
-                    }
-                    return 2; // Es Hora
-                }
-            }
+            Regex revisarTiempo = new Regex(@"^(?i)(0?[1-9]|1[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?( AM| PM)?$");
+            if (revisarTiempo.IsMatch(textoIni))
+                 return 2;
             //Si no es ninguno
             return -1;
         }

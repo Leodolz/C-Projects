@@ -7,27 +7,29 @@ namespace AgendaApp
 {
     class Agenda_Ayudante
     {
-        ArrayList agenda;
+        Dictionary<int, EntradaAgenda> agenda;
+        int ID = 1;
         public Agenda_Ayudante()
         {
-            agenda = new ArrayList();
+            agenda = new Dictionary<int, EntradaAgenda>();
         }
         public void add(string texto, string fecha="", string hora="")
         {
             if (fecha.Equals(""))
                 fecha = DateTime.Today.ToString("dd-MM-yyyy");
-            agenda.Add(new EntradaAgenda(texto, fecha, hora));
+            agenda.Add(ID,new EntradaAgenda(texto, fecha, hora,ID));
+            ID++;
             Console.WriteLine("Texto ingresado correctamente");
         }
         public void show(string fecha = "")
         {
             if(fecha.Equals(""))
-                fecha = DateTime.Today.ToString("dd-MM-yyyy");
+                fecha = DateTime.Today.ToString("dd/MM/yyyy");
             ArrayList mostrarEntradas = new ArrayList();
-            foreach (EntradaAgenda entrada in agenda)
+            foreach (KeyValuePair<int,EntradaAgenda> entrada in agenda)
             {
-                if (entrada.fecha.Equals(fecha))
-                    mostrarEntradas.Add(entrada);
+                if (entrada.Value.fecha.Equals(fecha))
+                    mostrarEntradas.Add(entrada.Value);
             }
             foreach(EntradaAgenda entrada in mostrarEntradas)
             {
@@ -35,18 +37,14 @@ namespace AgendaApp
                 string hora = "";
                 if (!entrada.hora.Equals(""))
                     hora = "Hora: " + entrada.hora + " ";
-                Console.WriteLine("Fecha: "+entrada.fecha+texto+hora+"ID: "+(agenda.IndexOf(entrada)+1));
+                Console.WriteLine("Fecha: "+entrada.fecha+texto+hora+"ID: "+(entrada.ID));
             }
         }
         public void remove(int id)
         {
-            if (id > agenda.Count || id < agenda.Count)
-            {
-                Console.WriteLine("No existe dicho id");
-                return;
-            }
-            else agenda.RemoveAt(id - 1);
-            Console.WriteLine("Entrada eliminada con exito");
+            if (agenda.Remove(id))
+                Console.WriteLine("Entrada eliminada con exito");
+            else Console.WriteLine("No existe entrada con dicho ID");
         }
     }
 }
