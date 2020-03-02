@@ -25,13 +25,7 @@ namespace AgendaApp
         {
             if(fecha.Equals(""))
                 fecha = DateTime.Today.ToString("dd/MM/yyyy");
-            ArrayList mostrarEntradas = new ArrayList();
-            foreach (KeyValuePair<int,EntradaAgenda> entrada in agenda)
-            {
-                if (entrada.Value.fecha.Equals(fecha))
-                    mostrarEntradas.Add(entrada.Value);
-            }
-            foreach(EntradaAgenda entrada in mostrarEntradas)
+            foreach (EntradaAgenda entrada in filtrar(fecha))
             {
                 string texto = " Texto: "+entrada.texto+" ";
                 string hora = "";
@@ -45,6 +39,16 @@ namespace AgendaApp
             if (agenda.Remove(id))
                 Console.WriteLine("Entrada eliminada con exito");
             else Console.WriteLine("No existe entrada con dicho ID");
+        }
+        private ArrayList filtrar(string fecha)
+        {
+            ArrayList filtrado = new ArrayList();
+            foreach (KeyValuePair<int, EntradaAgenda> entrada in agenda)
+            {
+                if (entrada.Value.fecha.Equals(fecha))
+                    filtrado.Add(entrada.Value);
+            }
+            return filtrado;
         }
     }
 }
