@@ -87,7 +87,8 @@ namespace AgendaApp
                 return;
             }
             DateTime date;
-            if (DateTime.TryParseExact(entrada, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            var formatos = new[] { "MM/dd/yyyy", "dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd","MM-dd-yyyy","dd-MM-yyyy" };
+            if (DateTime.TryParseExact(entrada, formatos, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
                 ayudante.show(entrada);
             }

@@ -24,7 +24,7 @@ namespace AgendaApp
         public void show(string fecha = "")
         {
             if(fecha.Equals(""))
-                fecha = DateTime.Today.ToString("dd/MM/yyyy");
+                fecha = DateTime.Today.ToString("dd-MM-yyyy");
             foreach (EntradaAgenda entrada in filtrar(fecha))
             {
                 string texto = " Texto: "+entrada.texto+" ";
