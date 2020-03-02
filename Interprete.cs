@@ -11,6 +11,11 @@ namespace AgendaApp
     {
         Agenda_Ayudante ayudante = new Agenda_Ayudante();
         private static string[] formatosFecha = new[] { "MM/dd/yyyy", "dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd", "MM-dd-yyyy", "dd-MM-yyyy" };
+        private const int PLAIN_TEXT = 1;
+        private const int DOS_ENTRADAS = 2;
+        private const int TRES_ENTRADAS = 3;
+        private const int FECHA_PRIMERO = 4;
+        private const int HORA_PRIMERO = 5;
         public bool comando(string entrada)
         {
             if (entrada.StartsWith("ADD"))
@@ -36,16 +41,16 @@ namespace AgendaApp
             string[] separado = entrada.Split(" ");
             switch(separado.Length)
             {
-                case 1: //texto
+                case PLAIN_TEXT:
                     ayudante.add(separado[0]);
                     break;
-                case 2: //dos entradas
+                case DOS_ENTRADAS:
                     switch(reconocerComando(separado[0]))
                     {
-                        case 1:
+                        case FECHA_PRIMERO:
                             ayudante.add(separado[1], separado[0]);
                             break;
-                        case 2:
+                        case HORA_PRIMERO:
                             ayudante.add(separado[1], "", separado[0]);
                             break;
                         default:
@@ -53,7 +58,7 @@ namespace AgendaApp
                             break;
                     }
                     break;
-                case 3:
+                case TRES_ENTRADAS:
                     ayudante.add(separado[2], separado[0], separado[1]);
                     break;
                 default:
@@ -67,11 +72,10 @@ namespace AgendaApp
         {
             DateTime date;
             if (DateTime.TryParseExact(textoIni, formatosFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                 return 1; // Es Fecha
+                 return FECHA_PRIMERO; 
             Regex revisarTiempo = new Regex(@"^(?i)(0?[1-9]|1[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?( AM| PM)?$");
             if (revisarTiempo.IsMatch(textoIni))
-                 return 2;
-            //Si no es ninguno
+                 return HORA_PRIMERO;
             return -1;
         }
 
