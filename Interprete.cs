@@ -10,7 +10,7 @@ namespace AgendaApp
     class Interprete
     {
         Agenda_Ayudante ayudante = new Agenda_Ayudante();
-
+        private static string[] formatosFecha = new[] { "MM/dd/yyyy", "dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd", "MM-dd-yyyy", "dd-MM-yyyy" };
         public bool comando(string entrada)
         {
             if (entrada.StartsWith("ADD"))
@@ -65,13 +65,9 @@ namespace AgendaApp
 
         private int reconocerComando(string textoIni)
         {
-            ArrayList formatosFecha = new ArrayList {"dd/MM/yyyy","dd-MM-yyyy"};
-            foreach(string formato in formatosFecha)
-            {
-                    DateTime date;
-                    if (DateTime.TryParseExact(textoIni, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                        return 1; // Es Fecha
-            }
+            DateTime date;
+            if (DateTime.TryParseExact(textoIni, formatosFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                 return 1; // Es Fecha
             Regex revisarTiempo = new Regex(@"^(?i)(0?[1-9]|1[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?( AM| PM)?$");
             if (revisarTiempo.IsMatch(textoIni))
                  return 2;
@@ -87,13 +83,13 @@ namespace AgendaApp
                 return;
             }
             DateTime date;
-            var formatos = new[] { "MM/dd/yyyy", "dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd","MM-dd-yyyy","dd-MM-yyyy" };
-            if (DateTime.TryParseExact(entrada, formatos, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+
+            if (DateTime.TryParseExact(entrada, formatosFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
                 ayudante.show(entrada);
             }
 
-            else Console.WriteLine("Formato Erroneo, por favor intente de nuevo\nPara Fechas se usa el formato dd/MM/yyyy");
+            else Console.WriteLine("Formato Erroneo, por favor intente de nuevo");
         }
         private void eliminar(string entrada)
         {
