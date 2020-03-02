@@ -97,29 +97,13 @@ namespace AgendaApp
         }
         private void eliminar(string entrada)
         {
-            if(revisarNumero(entrada,true))
-            {
-                ayudante.remove(int.Parse(entrada));
-            }
+            ayudante.remove(int.Parse(entrada));
         }
         private string reemplazarUnaVez(string texto,string viejoReg,string nuevoReg)
         {
             var regex = new Regex(Regex.Escape(viejoReg));
             return regex.Replace(texto, nuevoReg, 1);
 
-        }
-        private bool revisarNumero(string num, bool hora)
-        {
-            int intStr;
-            if (int.TryParse(num, out intStr))
-            {
-                if (hora)
-                {
-                    return (intStr > 0);
-                }
-                else return (intStr > 0 && intStr < 60);
-            }
-            return false;
         }
     
     }
