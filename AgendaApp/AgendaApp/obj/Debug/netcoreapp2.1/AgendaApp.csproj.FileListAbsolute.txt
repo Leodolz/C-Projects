@@ -1,0 +1,11 @@
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\bin\Debug\netcoreapp2.1\AgendaApp.deps.json
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\bin\Debug\netcoreapp2.1\AgendaApp.runtimeconfig.json
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\bin\Debug\netcoreapp2.1\AgendaApp.runtimeconfig.dev.json
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\bin\Debug\netcoreapp2.1\AgendaApp.dll
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\bin\Debug\netcoreapp2.1\AgendaApp.pdb
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\obj\Debug\netcoreapp2.1\AgendaApp.csprojAssemblyReference.cache
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\obj\Debug\netcoreapp2.1\AgendaApp.csproj.CoreCompileInputs.cache
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\obj\Debug\netcoreapp2.1\AgendaApp.AssemblyInfoInputs.cache
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\obj\Debug\netcoreapp2.1\AgendaApp.AssemblyInfo.cs
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\obj\Debug\netcoreapp2.1\AgendaApp.dll
+D:\Leandro\Training\C#Projects\AgendaApp\AgendaApp\obj\Debug\netcoreapp2.1\AgendaApp.pdb
