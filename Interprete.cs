@@ -7,11 +7,9 @@ namespace AgendaApp
     class Interprete
     {
         Agenda_Ayudante ayudante = new Agenda_Ayudante();
-        private static string[] formatosFecha = new[] { "MM/dd/yyyy", "dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd", "MM-dd-yyyy", "dd-MM-yyyy" };
         private const int PLAIN_TEXT = 1;
         private const int DOS_ENTRADAS = 2;
         private const int TRES_ENTRADAS = 3;
-        private const string EMPTY = "";
         public bool comando(string entrada)
         {
             if (entrada.StartsWith("ADD"))
@@ -20,7 +18,7 @@ namespace AgendaApp
             }
             else if (entrada.StartsWith("SHOW"))
             {
-                show(reemplazarUnaVez(entrada, "SHOW ", ""));
+                show(reemplazarUnaVez(entrada, "SHOW", ""));
             }
             else if (entrada.StartsWith("REMOVE "))
             {
@@ -35,45 +33,17 @@ namespace AgendaApp
         private void add(string entrada)
         {
             string[] separado = entrada.Split(" ");
-            switch(separado.Length)
-            {
-                case PLAIN_TEXT:
-                    ayudante.add(separado[0]);
-                    break;
-                case DOS_ENTRADAS:
-                    reconocerComando(separado);
-                    break;
-                case TRES_ENTRADAS:
-                    ayudante.add(separado[2], separado[0], separado[1]);
-                    break;
-                default:
-                    Console.WriteLine("Formato invalido, vuelva a intentar");
-                    break;
-            }
-            
+            AddCommand ejecutarAdd = revisarComandoAdd(separado);
+            if (ejecutarAdd != null)
+                ejecutarAdd.Add(separado);
         }
 
-        private void reconocerComando(string[] comando)
+        private void show(string fecha)
         {
-            if (validarFecha(comando[0])) //Es Fecha primero
-                ayudante.add(comando[1], comando[0]);
-            else if (validarHora(comando[0])) //Es Hora primero
-                ayudante.add(comando[1], EMPTY, comando[0]);
-            else Console.WriteLine("Comando invalido, intente de nuevo");
-        }
-
-        private void show(string entrada)
-        {
-            if (entrada.Equals(EMPTY) || entrada.Equals(" "))
-            {
-                ayudante.show();
-                return;
-            }
-            if (validarFecha(entrada))
-            {
-                ayudante.show(entrada);
-            }
-
+            if (fecha.Trim().Equals(string.Empty))
+                fecha = DateTime.Today.ToString("dd-MM-yyyy");
+            if (Validators.validarFecha(fecha.Trim()))
+                ayudante.show(fecha);
             else Console.WriteLine("Formato Erroneo, por favor intente de nuevo");
         }
         private void eliminar(string entrada)
@@ -86,16 +56,21 @@ namespace AgendaApp
             return regex.Replace(texto, nuevoReg, 1);
 
         }
-        private bool validarFecha(string entrada)
+       
+        private AddCommand revisarComandoAdd(string[] separado)
         {
-            DateTime date;
-            return DateTime.TryParseExact(entrada, formatosFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+            switch (separado.Length)
+            {
+                case PLAIN_TEXT:
+                    return new AddPlainText(ayudante);
+                case DOS_ENTRADAS:
+                    return new AddTwoEntries(ayudante);
+                case TRES_ENTRADAS:
+                    return new AddThreeEntries(ayudante);
+                default:
+                    Console.WriteLine("Formato invalido, vuelva a intentar");
+                    return null;
+            }
         }
-        private bool validarHora(string entrada)
-        {
-            Regex revisarTiempo = new Regex(@"^(?i)(0?[1-9]|1[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?( AM| PM)?$");
-            return revisarTiempo.IsMatch(entrada);
-        }
-    
     }
 }

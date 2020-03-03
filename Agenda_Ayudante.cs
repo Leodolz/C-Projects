@@ -4,27 +4,24 @@ using System.Collections.Generic;
 
 namespace AgendaApp
 {
-    class Agenda_Ayudante
+    public class Agenda_Ayudante
     {
         Dictionary<int, EntradaAgenda> agenda;
-        private const string EMPTY = "";
         int ID = 1;
         public Agenda_Ayudante()
         {
             agenda = new Dictionary<int, EntradaAgenda>();
         }
-        public void add(string texto, string fecha=EMPTY, string hora=EMPTY)
+        public void add(string texto, string fecha="", string hora="")
         {
-            if (fecha.Equals(EMPTY))
+            if (fecha.Equals(string.Empty))
                 fecha = DateTime.Today.ToString("dd-MM-yyyy");
             agenda.Add(ID,new EntradaAgenda(texto, fecha, hora,ID));
             ID++;
             Console.WriteLine("Texto ingresado correctamente");
         }
-        public void show(string fecha = EMPTY)
+        public void show(string fecha)
         {
-            if(fecha.Equals(EMPTY))
-                fecha = DateTime.Today.ToString("dd-MM-yyyy");
             foreach (EntradaAgenda entrada in filtrar(fecha))
             {
                 Console.WriteLine(construirMensaje(entrada));
@@ -49,8 +46,8 @@ namespace AgendaApp
         private string construirMensaje(EntradaAgenda entrada)
         {
             string texto = " Texto: " + entrada.texto + " ";
-            string hora = EMPTY;
-            if (!entrada.hora.Equals(EMPTY))
+            string hora = string.Empty;
+            if (!entrada.hora.Equals(string.Empty))
                 hora = "Hora: " + entrada.hora + " ";
             return "Fecha: " + entrada.fecha + texto + hora + "ID: " + (entrada.ID);
         }
