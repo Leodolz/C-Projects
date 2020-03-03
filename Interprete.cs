@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace AgendaApp
@@ -14,8 +11,7 @@ namespace AgendaApp
         private const int PLAIN_TEXT = 1;
         private const int DOS_ENTRADAS = 2;
         private const int TRES_ENTRADAS = 3;
-        private const int FECHA_PRIMERO = 4;
-        private const int HORA_PRIMERO = 5;
+        private const string EMPTY = "";
         public bool comando(string entrada)
         {
             if (entrada.StartsWith("ADD"))
@@ -45,18 +41,7 @@ namespace AgendaApp
                     ayudante.add(separado[0]);
                     break;
                 case DOS_ENTRADAS:
-                    switch(reconocerComando(separado[0]))
-                    {
-                        case FECHA_PRIMERO:
-                            ayudante.add(separado[1], separado[0]);
-                            break;
-                        case HORA_PRIMERO:
-                            ayudante.add(separado[1], "", separado[0]);
-                            break;
-                        default:
-                            Console.WriteLine("Comando invalido, intente de nuevo");
-                            break;
-                    }
+                    reconocerComando(separado);
                     break;
                 case TRES_ENTRADAS:
                     ayudante.add(separado[2], separado[0], separado[1]);
@@ -68,27 +53,23 @@ namespace AgendaApp
             
         }
 
-        private int reconocerComando(string textoIni)
+        private void reconocerComando(string[] comando)
         {
-            DateTime date;
-            if (DateTime.TryParseExact(textoIni, formatosFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                 return FECHA_PRIMERO; 
-            Regex revisarTiempo = new Regex(@"^(?i)(0?[1-9]|1[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?( AM| PM)?$");
-            if (revisarTiempo.IsMatch(textoIni))
-                 return HORA_PRIMERO;
-            return -1;
+            if (validarFecha(comando[0])) //Es Fecha primero
+                ayudante.add(comando[1], comando[0]);
+            else if (validarHora(comando[0])) //Es Hora primero
+                ayudante.add(comando[1], EMPTY, comando[0]);
+            else Console.WriteLine("Comando invalido, intente de nuevo");
         }
 
         private void show(string entrada)
         {
-            if (entrada.Equals("") || entrada.Equals(" "))
+            if (entrada.Equals(EMPTY) || entrada.Equals(" "))
             {
                 ayudante.show();
                 return;
             }
-            DateTime date;
-
-            if (DateTime.TryParseExact(entrada, formatosFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            if (validarFecha(entrada))
             {
                 ayudante.show(entrada);
             }
@@ -104,6 +85,16 @@ namespace AgendaApp
             var regex = new Regex(Regex.Escape(viejoReg));
             return regex.Replace(texto, nuevoReg, 1);
 
+        }
+        private bool validarFecha(string entrada)
+        {
+            DateTime date;
+            return DateTime.TryParseExact(entrada, formatosFecha, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+        }
+        private bool validarHora(string entrada)
+        {
+            Regex revisarTiempo = new Regex(@"^(?i)(0?[1-9]|1[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?( AM| PM)?$");
+            return revisarTiempo.IsMatch(entrada);
         }
     
     }
