@@ -6,6 +6,6 @@ namespace AgendaApp
 {
     interface AgendaAdd
     {
-       void execute( string[] texto);
+       void execute( string[] text);
     }
 }

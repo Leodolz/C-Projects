@@ -9,7 +9,7 @@ namespace AgendaApp
     public static class AgendaTools
     {
 
-        public static ArrayList Sort(string sortingDate, Dictionary<int, AgendaEntry> agenda)
+        public static ArrayList SortbyDate(string sortingDate, Dictionary<int, AgendaEntry> agenda)
         {
             ArrayList filtered = new ArrayList();
             DateTime sortingDateTime = Validators.getDateTime(sortingDate.Trim());

@@ -6,33 +6,33 @@ namespace AgendaApp
 {
     class Interpreter
     {
-        AgendaHelper ayudante = new AgendaHelper();
-        private const int PLAIN_TEXT = 1;
+        AgendaActions agendaClient = new AgendaActions();
+        private const int ONE_ENTRY = 1;
         private const int TWO_ENTRIES = 2;
         private const int THREE_ENTRIES = 3;
-        public bool command(string entrada)
+        public bool command(string userEntry)
         {
-            if (entrada.StartsWith("ADD"))
+            if (userEntry.StartsWith("ADD"))
             {
-                add(replaceOnce(entrada, "ADD ", ""));
+                add(replaceOnce(userEntry, "ADD ", ""));
             }
-            else if (entrada.StartsWith("SHOW"))
+            else if (userEntry.StartsWith("SHOW"))
             {
-                show(replaceOnce(entrada, "SHOW", ""));
+                show(replaceOnce(userEntry, "SHOW", ""));
             }
-            else if (entrada.StartsWith("REMOVE "))
+            else if (userEntry.StartsWith("REMOVE "))
             {
-                remove(replaceOnce(entrada, "REMOVE ", ""));
+                remove(replaceOnce(userEntry, "REMOVE ", ""));
             }
-            else if (entrada.StartsWith("ESC"))
+            else if (userEntry.StartsWith("ESC"))
                 return true;
             else
                 Console.WriteLine("Error, porfavor inserte un comando valido\nCOMANDOS:\nADD\nSHOW\nREMOVE");
             return false;
         }
-        private void add(string entrada)
+        private void add(string userEntry)
         {
-            string[] separado = entrada.Split(" ");
+            string[] separado = userEntry.Split(" ");
             AgendaAdd agendaAdd = checkAddCommand(separado);
             if (agendaAdd != null)
                 agendaAdd.execute(separado);
@@ -42,12 +42,15 @@ namespace AgendaApp
         {
             date = AgendaTools.putDateIfNecessary(date);
             if (Validators.isValidDate(date.Trim()))
-                ayudante.show(date);
+                agendaClient.show(date);
             else Console.WriteLine("Formato Erroneo, por favor intente de nuevo");
         }
-        private void remove(string entry)
+        private void remove(string idEntry)
         {
-            ayudante.remove(int.Parse(entry));
+            int id;
+            if (int.TryParse(idEntry, out id))
+                agendaClient.remove(id);
+            else Console.WriteLine("Comando invalido, por favor intente de nuevo");
         }
         private string replaceOnce(string texto,string viejoReg,string nuevoReg)
         {
@@ -56,16 +59,16 @@ namespace AgendaApp
 
         }
        
-        private AgendaAdd checkAddCommand(string[] separado)
+        private AgendaAdd checkAddCommand(string[] userEntry)
         {
-            switch (separado.Length)
+            switch (userEntry.Length)
             {
-                case PLAIN_TEXT:
-                    return new AddPlainText(ayudante);
+                case ONE_ENTRY:
+                    return new AddPlainText(agendaClient);
                 case TWO_ENTRIES:
-                    return new AddTwoEntries(ayudante);
+                    return new AddTwoEntries(agendaClient);
                 case THREE_ENTRIES:
-                    return new AddThreeEntries(ayudante);
+                    return new AddThreeEntries(agendaClient);
                 default:
                     Console.WriteLine("Formato invalido, vuelva a intentar");
                     return null;

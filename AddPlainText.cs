@@ -6,14 +6,14 @@ namespace AgendaApp
 {
     class AddPlainText : AgendaAdd
     {
-        AgendaHelper ayudante;
-        public AddPlainText(AgendaHelper ayudante)
+        AgendaActions commander;
+        public AddPlainText(AgendaActions commander)
         {
-            this.ayudante = ayudante;
+            this.commander = commander;
         }
-        public void execute(string[] texto)
+        public void execute(string[] text)
         {
-            ayudante.add(texto[0]);
+            commander.add(text[0]);
         }
     }
 }
