@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace AgendaApp
@@ -8,13 +9,15 @@ namespace AgendaApp
     public static class AgendaTools
     {
 
-        public static ArrayList Sort(string date, Dictionary<int, AgendaEntry> agenda)
+        public static ArrayList Sort(string sortingDate, Dictionary<int, AgendaEntry> agenda)
         {
             ArrayList filtered = new ArrayList();
-            foreach (KeyValuePair<int, AgendaEntry> entrada in agenda)
+            DateTime sortingDateTime = Validators.getDateTime(sortingDate.Trim());
+            foreach (KeyValuePair<int, AgendaEntry> entry in agenda)
             {
-                if (entrada.Value.date.Equals(date))
-                    filtered.Add(entrada.Value);
+                DateTime entryDateTime = Validators.getDateTime(entry.Value.date.Trim());
+                if (entryDateTime.Date == sortingDateTime.Date)
+                    filtered.Add(entry.Value);
             }
             return filtered;
         }
@@ -29,7 +32,7 @@ namespace AgendaApp
         public static string putDateIfNecessary(string date)
         {
             if (date.Trim().Equals(string.Empty))
-                return DateTime.Today.ToString("dd-MM-yyyy");
+                return DateTime.Today.Date.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
             else return date;
         }
     }

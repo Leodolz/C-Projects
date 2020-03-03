@@ -32,6 +32,6 @@ namespace AgendaApp
                 Console.WriteLine("Entrada eliminada con exito");
             else Console.WriteLine("No existe entrada con dicho ID");
         }
-        
+       
     }
 }
