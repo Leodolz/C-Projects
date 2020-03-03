@@ -3,23 +3,23 @@
 
 namespace AgendaApp
 {
-    class AddTwoEntries : AddCommand
+    class AddTwoEntries : AgendaAdd
     {
-        Agenda_Ayudante ayudante;
-        public AddTwoEntries(Agenda_Ayudante ayudante)
+        AgendaHelper ayudante;
+        public AddTwoEntries(AgendaHelper ayudante)
         {
             this.ayudante = ayudante;
         }
-        public void Add(string[] texto)
+        public void execute(string[] texto)
         {
             reconocerComando(texto);
         }
 
         private void reconocerComando(string[] comando)
         {
-            if (Validators.validarFecha(comando[0])) //Es Fecha primero
+            if (Validators.isValidDate(comando[0])) //Es Fecha primero
                 ayudante.add(comando[1], comando[0]);
-            else if (Validators.validarHora(comando[0])) //Es Hora primero
+            else if (Validators.isValidTime(comando[0])) //Es Hora primero
                 ayudante.add(comando[1], string.Empty, comando[0]);
             else Console.WriteLine("Comando invalido, intente de nuevo");
         }

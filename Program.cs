@@ -6,12 +6,12 @@ namespace AgendaApp
     {
         static void Main(string[] args)
         {
-            Interprete cliente = new Interprete();
+            Interpreter client = new Interpreter();
             Console.WriteLine("Agenda Software:\nComandos:\nADD\nSHOW\nREMOVE\nESC");
             while (true)
             {
-                string entrada = Console.ReadLine();
-                if (cliente.comando(entrada))
+                string entry = Console.ReadLine();
+                if (client.command(entry))
                     break;
             }
         }

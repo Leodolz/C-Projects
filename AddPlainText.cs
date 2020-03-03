@@ -4,14 +4,14 @@ using System.Text;
 
 namespace AgendaApp
 {
-    class AddPlainText : AddCommand
+    class AddPlainText : AgendaAdd
     {
-        Agenda_Ayudante ayudante;
-        public AddPlainText(Agenda_Ayudante ayudante)
+        AgendaHelper ayudante;
+        public AddPlainText(AgendaHelper ayudante)
         {
             this.ayudante = ayudante;
         }
-        public void Add(string[] texto)
+        public void execute(string[] texto)
         {
             ayudante.add(texto[0]);
         }
