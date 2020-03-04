@@ -9,9 +9,9 @@ namespace AgendaApp
     {
         public int Compare(object x, object y)
         {
-            AgendaEntry xA = (AgendaEntry)x;
-            AgendaEntry yA = (AgendaEntry)y;
-            return DateTime.Compare(Validators.GetDateTime(xA.date), Validators.GetDateTime(yA.date));
+            AgendaEntry entryToCompare1 = (AgendaEntry)x;
+            AgendaEntry entryToCompare2 = (AgendaEntry)y;
+            return DateTime.Compare(Validators.GetDateTime(entryToCompare1.date), Validators.GetDateTime(entryToCompare2.date));
         }
     }
 }

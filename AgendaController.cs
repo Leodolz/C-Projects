@@ -9,7 +9,7 @@ namespace AgendaApp
         private static int entryID = 1;
         public void AddEntry(string entryText, string entryDate="", string entryTime="")
         {
-            entryDate = AgendaTools.PutDateIfNecessary(entryDate);
+            entryDate = AgendaTools.GetDateIfNecessary(entryDate);
             userAgenda.Add(entryID,new AgendaEntry(entryText, entryDate, entryTime,entryID));
             entryID++;
             Console.WriteLine("Texto ingresado correctamente");

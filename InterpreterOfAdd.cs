@@ -14,15 +14,15 @@ namespace AgendaApp
         }
         public void ExecuteTask(string userEntry)
         {
-            string[] userEntryValues = userEntry.Split(" ");
-            IUserOrder agendaAdd = GetAddCommand(userEntryValues, agendaController);
+            int numberEntryValues = userEntry.Split(" ").Length;
+            IUserOrder agendaAdd = GetAddCommand(numberEntryValues, agendaController);
             if (agendaAdd != null)
                 agendaAdd.ExecuteTask(userEntry);
             else Console.WriteLine("Formato invalido, vuelva a intentar");
         }
-        private IUserOrder GetAddCommand(string[] userEntryAttributes, AgendaController agendaClient)
+        private IUserOrder GetAddCommand(int numberEntryValues, AgendaController agendaClient)
         {
-            switch (userEntryAttributes.Length)
+            switch (numberEntryValues)
             {
                 case ONE_ENTRY:
                     return new AdderOneEntry(agendaClient);

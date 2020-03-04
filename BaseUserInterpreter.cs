@@ -13,10 +13,10 @@ namespace AgendaApp
             AgendaValidCommands =
                 new Dictionary<string, IUserOrder>()
                 {
+                    {"EXIT", new InterpreterOfEscape()},
                     {"ADD ", new InterpreterOfAdd(agendaController)},
                     {"SHOW", new InterpreterOfShow(agendaController)},
-                    {"REMOVE ", new InterpreterOfRemove(agendaController)},
-                    {"EXIT", new InterpreterOfEscape()}
+                    {"REMOVE ", new InterpreterOfRemove(agendaController)}
                 };
         }
         public void ParseUserCommand(string userEntry)
@@ -26,7 +26,7 @@ namespace AgendaApp
             {
                 if (userEntry.StartsWith(commandName))
                 {
-                    string agendaCommand = ReplaceTextOnce(userEntry, commandName, "");
+                    string agendaCommand = ReplaceTextOnce(userEntry, commandName, string.Empty);
                     AgendaValidCommands[commandName].ExecuteTask(agendaCommand);
                     return;
                 }
@@ -42,9 +42,11 @@ namespace AgendaApp
         private void ThrowInvalidCommandError(Dictionary<string,IUserOrder> agendaValidCommands)
         {
             Console.WriteLine("Error, porfavor inserte un comando valido\nCOMANDOS:");
+            int commandNumber = 1;
             foreach (string validCommand in agendaValidCommands.Keys)
             {
-                Console.WriteLine(validCommand);
+                Console.WriteLine(commandNumber+". "+validCommand);
+                commandNumber++;
             }
         }
         public void AddUserValidCommand(string commandName, IUserOrder executableCommand)

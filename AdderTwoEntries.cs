@@ -14,7 +14,6 @@ namespace AgendaApp
         {
             ValidateCommand(entryTextCommand.Split(" "));
         }
-
         private void ValidateCommand(string[] entryAttributes)
         {
             if (Validators.IsValidTime(entryAttributes[0])) //It's time first

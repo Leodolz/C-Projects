@@ -28,7 +28,7 @@ namespace AgendaApp
                 showingTime = "Hora: " + agendaEntry.time + " ";
             return "Fecha: " + agendaEntry.date + showingText + showingTime + "ID: " + (agendaEntry.ID);
         }
-        public static string PutDateIfNecessary(string entryDate)
+        public static string GetDateIfNecessary(string entryDate)
         {
             if (entryDate.Trim().Equals(string.Empty))
                 return DateTime.Today.Date.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);

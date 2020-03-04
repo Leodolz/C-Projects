@@ -12,7 +12,7 @@ namespace AgendaApp
 
         public void ExecuteTask(string showDate)
         {
-            showDate = AgendaTools.PutDateIfNecessary(showDate);
+            showDate = AgendaTools.GetDateIfNecessary(showDate);
             if (Validators.IsValidDate(showDate.Trim()))
                 ShowEntries(showDate);
             else Console.WriteLine("Formato Erroneo, por favor intente de nuevo");
