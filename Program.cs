@@ -6,7 +6,7 @@ namespace AgendaApp
     {
         static void Main(string[] args)
         {
-            GeneralUserInterpreter userInterpreter = new GeneralUserInterpreter();
+            IUserInterpreter userInterpreter = new UserInterpreterDecorator(new BaseUserInterpreter());
             Console.WriteLine("Agenda App:\nValid Commands:\nADD\nSHOW\nREMOVE\nESC");
             while (true)
             {

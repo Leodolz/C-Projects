@@ -6,6 +6,9 @@ namespace AgendaApp
 {
     public class AgendaController
     {
+        private static AgendaController thisInstance = new AgendaController();
+        public AgendaController(){}
+
         Dictionary<int, AgendaEntry> userAgenda = new Dictionary<int,AgendaEntry>();
         int entryID = 1;
         public void AddEntry(string entryText, string entryDate="", string entryTime="")
@@ -28,6 +31,17 @@ namespace AgendaApp
                 Console.WriteLine("Entrada eliminada con exito");
             else Console.WriteLine("No existe entrada con dicho ID");
         }
-       
+        public static AgendaController getInstance()
+        {
+            return thisInstance;
+        }
+        public void SearchEntry(string filteringText)
+        {
+            ArrayList showEntries = AgendaTools.FilterByText(filteringText,userAgenda);
+            foreach (AgendaEntry showingEntry in showEntries)
+            {
+                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(showingEntry));
+            }
+        }
     }
 }
