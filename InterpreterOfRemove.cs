@@ -14,8 +14,14 @@ namespace AgendaApp
         {
             int parsedId;
             if (int.TryParse(idEntry, out parsedId))
-                agendaController.RemoveEntry(parsedId);
+                RemoveEntry(parsedId);
             else Console.WriteLine("Comando invalido, por favor intente de nuevo");
+        }
+        private void RemoveEntry(int entryID)
+        {
+            if (agendaController.getAgenda().Remove(entryID))
+                Console.WriteLine("Entrada eliminada con exito");
+            else Console.WriteLine("No existe entrada con dicho ID");
         }
     }
 }

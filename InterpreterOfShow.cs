@@ -14,8 +14,15 @@ namespace AgendaApp
         {
             showDate = AgendaTools.PutDateIfNecessary(showDate);
             if (Validators.IsValidDate(showDate.Trim()))
-                agendaController.ShowEntries(showDate);
+                ShowEntries(showDate);
             else Console.WriteLine("Formato Erroneo, por favor intente de nuevo");
+        }
+        private void ShowEntries(string entryDate)
+        {
+            foreach (AgendaEntry entry in AgendaTools.FilterbyDate(entryDate, agendaController.getAgenda()))
+            {
+                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(entry));
+            }
         }
     }
 }

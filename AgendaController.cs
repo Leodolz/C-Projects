@@ -15,20 +15,6 @@ namespace AgendaApp
             entryID++;
             Console.WriteLine("Texto ingresado correctamente");
         }
-        public void ShowEntries(string entryDate)
-        {
-            foreach (AgendaEntry entry in AgendaTools.FilterbyDate(entryDate,userAgenda))
-            {
-                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(entry));
-            }
-        }
-        public void RemoveEntry(int entryID)
-        {
-            if (userAgenda.Remove(entryID))
-                Console.WriteLine("Entrada eliminada con exito");
-            else Console.WriteLine("No existe entrada con dicho ID");
-        }
-       
         public int getID()
         {
             return entryID;
