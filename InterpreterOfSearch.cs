@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,7 +14,11 @@ namespace AgendaApp
         }
         public void ExecuteTask(string entryText)
         {
-            agendaController.SearchEntry(entryText);
+            ArrayList showEntries = AgendaTools.FilterByText(entryText, agendaController.getAgenda());
+            foreach (AgendaEntry showingEntry in showEntries)
+            {
+                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(showingEntry));
+            }
         }
     }
 }

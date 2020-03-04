@@ -7,10 +7,10 @@ namespace AgendaApp
     public class AgendaController
     {
         private static AgendaController thisInstance = new AgendaController();
-        public AgendaController(){}
+        public AgendaController() { }
 
-        Dictionary<int, AgendaEntry> userAgenda = new Dictionary<int,AgendaEntry>();
-        int entryID = 1;
+        private Dictionary<int, AgendaEntry> userAgenda = new Dictionary<int, AgendaEntry>();
+        private static int entryID = 1;
         public void AddEntry(string entryText, string entryDate="", string entryTime="")
         {
             entryDate = AgendaTools.PutDateIfNecessary(entryDate);
@@ -35,13 +35,17 @@ namespace AgendaApp
         {
             return thisInstance;
         }
-        public void SearchEntry(string filteringText)
+        public int getID()
         {
-            ArrayList showEntries = AgendaTools.FilterByText(filteringText,userAgenda);
-            foreach (AgendaEntry showingEntry in showEntries)
-            {
-                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(showingEntry));
-            }
+            return entryID;
+        }
+        public void incID()
+        {
+            entryID++;
+        }
+        public Dictionary<int, AgendaEntry> getAgenda()
+        {
+            return userAgenda;
         }
     }
 }
