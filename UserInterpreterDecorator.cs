@@ -19,7 +19,6 @@ namespace AgendaApp
         {
             decoratedInterpreter.AddUserValidCommand("SEARCH ", new InterpreterOfSearch(agendaController));
         }
-
         public AgendaController GetAgendaController()
         {
             return decoratedInterpreter.GetAgendaController();

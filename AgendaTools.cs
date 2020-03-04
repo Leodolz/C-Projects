@@ -8,7 +8,7 @@ namespace AgendaApp
     public static class AgendaTools
     {
 
-        public static ArrayList FilterbyDate(string filteringDate, Dictionary<int, AgendaEntry> userAgenda)
+        public static ArrayList FilterByDate(string filteringDate, Dictionary<int, AgendaEntry> userAgenda)
         {
             ArrayList filteredEntryList = new ArrayList();
             DateTime sortingDateTime = Validators.GetDateTime(filteringDate.Trim());
@@ -34,21 +34,7 @@ namespace AgendaApp
                 return DateTime.Today.Date.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
             else return entryDate;
         }
-        public static ArrayList FilterByText(string filteringText, Dictionary<int, AgendaEntry> userAgenda)
-        {
-            ArrayList filteredEntryList = new ArrayList();
-            foreach(KeyValuePair<int,AgendaEntry> agendaEntry in userAgenda)
-            {
-                if (agendaEntry.Value.text.Contains(filteringText))
-                    filteredEntryList.Add(agendaEntry.Value);
-            }
-            return SortByDate(filteredEntryList);
+       
 
-        }
-        public static ArrayList SortByDate(ArrayList entryList)
-        {
-            entryList.Sort(new CustomDateComparer());
-            return entryList;
-        }
     }
 }

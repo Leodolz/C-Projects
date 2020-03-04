@@ -19,7 +19,7 @@ namespace AgendaApp
         }
         private void RemoveEntry(int entryID)
         {
-            if (agendaController.getAgenda().Remove(entryID))
+            if (agendaController.GetAgenda().Remove(entryID))
                 Console.WriteLine("Entrada eliminada con exito");
             else Console.WriteLine("No existe entrada con dicho ID");
         }

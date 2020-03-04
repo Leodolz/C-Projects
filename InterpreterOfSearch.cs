@@ -14,11 +14,27 @@ namespace AgendaApp
         }
         public void ExecuteTask(string entryText)
         {
-            ArrayList showEntries = AgendaTools.FilterByText(entryText, agendaController.getAgenda());
+            ArrayList showEntries = FilterByText(entryText, agendaController.GetAgenda());
             foreach (AgendaEntry showingEntry in showEntries)
             {
                 Console.WriteLine(AgendaTools.BuildEntryShowingMessage(showingEntry));
             }
+        }
+        private ArrayList FilterByText(string filteringText, Dictionary<int, AgendaEntry> userAgenda)
+        {
+            ArrayList filteredEntryList = new ArrayList();
+            foreach (KeyValuePair<int, AgendaEntry> agendaEntry in userAgenda)
+            {
+                if (agendaEntry.Value.text.Contains(filteringText))
+                    filteredEntryList.Add(agendaEntry.Value);
+            }
+            return SortByDate(filteredEntryList);
+
+        }
+        private ArrayList SortByDate(ArrayList entryList)
+        {
+            entryList.Sort(new CustomDateComparer());
+            return entryList;
         }
     }
 }

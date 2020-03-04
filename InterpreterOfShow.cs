@@ -19,7 +19,7 @@ namespace AgendaApp
         }
         private void ShowEntries(string entryDate)
         {
-            foreach (AgendaEntry entry in AgendaTools.FilterbyDate(entryDate, agendaController.getAgenda()))
+            foreach (AgendaEntry entry in AgendaTools.FilterByDate(entryDate, agendaController.GetAgenda()))
             {
                 Console.WriteLine(AgendaTools.BuildEntryShowingMessage(entry));
             }

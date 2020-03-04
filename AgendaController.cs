@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace AgendaApp
@@ -15,15 +14,15 @@ namespace AgendaApp
             entryID++;
             Console.WriteLine("Texto ingresado correctamente");
         }
-        public int getID()
+        public int GetID()
         {
             return entryID;
         }
-        public void incID()
+        public void IncID()
         {
             entryID++;
         }
-        public Dictionary<int, AgendaEntry> getAgenda()
+        public Dictionary<int, AgendaEntry> GetAgenda()
         {
             return userAgenda;
         }

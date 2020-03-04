@@ -16,7 +16,7 @@ namespace AgendaApp
                     {"ADD ", new InterpreterOfAdd(agendaController)},
                     {"SHOW", new InterpreterOfShow(agendaController)},
                     {"REMOVE ", new InterpreterOfRemove(agendaController)},
-                    {"ESC", new InterpreterOfEscape()}
+                    {"EXIT", new InterpreterOfEscape()}
                 };
         }
         public void ParseUserCommand(string userEntry)
