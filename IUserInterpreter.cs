@@ -8,5 +8,6 @@ namespace AgendaApp
     {
         void ParseUserCommand(string userEntry);
         void AddUserValidCommand(string commandName, IUserOrder executableCommand);
+        AgendaController GetAgendaController();
     }
 }

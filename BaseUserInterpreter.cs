@@ -7,7 +7,7 @@ namespace AgendaApp
     class BaseUserInterpreter:IUserInterpreter
     {
         public static Dictionary<string, IUserOrder> AgendaValidCommands = new Dictionary<string,IUserOrder>();
-        AgendaController agendaController = AgendaController.getInstance();
+        AgendaController agendaController = new AgendaController();
         public BaseUserInterpreter()
         {
             AgendaValidCommands =
@@ -52,5 +52,9 @@ namespace AgendaApp
             AgendaValidCommands.Add(commandName, executableCommand);
         }
 
+        public AgendaController GetAgendaController()
+        {
+            return agendaController;
+        }
     }
 }
