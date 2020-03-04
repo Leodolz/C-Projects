@@ -14,8 +14,9 @@ namespace AgendaApp
         public void ExecuteTask(string userEntries)
         {
             string[] controllerCommands = userEntries.Split(" ");
-            if (Validators.IsValidDate(controllerCommands[0]) && Validators.IsValidTime(controllerCommands[1]))
-                agendaController.AddEntry(controllerCommands[2], controllerCommands[0], controllerCommands[1]);
+            string entryText = controllerCommands[2]; string entryDate = controllerCommands[0]; string entryTime = controllerCommands[1];
+            if (Validators.IsValidDate(entryDate) && Validators.IsValidTime(entryTime))
+                agendaController.AddEntry(entryText, entryDate, entryTime);
             else Console.WriteLine("Formato invalido... Debe considerar un formato de: <Fecha> <Hora> <Texto>");
         }
     }
