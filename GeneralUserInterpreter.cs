@@ -19,7 +19,7 @@ namespace AgendaApp
                     {"ESC", new InterpreterOfEscape()}
                 };
         }
-        public void InterpretCommand(string userEntry)
+        public void ParseUserCommand(string userEntry)
         {
            
             foreach(string commandName in AgendaValidCommands.Keys)
@@ -34,17 +34,17 @@ namespace AgendaApp
             ThrowInvalidCommand(AgendaValidCommands);
         }
        
-        private string ReplaceOnce(string texto,string viejoReg,string nuevoReg)
+        private string ReplaceOnce(string textToParse,string oldCharSeq,string newCharSeq)
         {
-            var regex = new Regex(Regex.Escape(viejoReg));
-            return regex.Replace(texto, nuevoReg, 1);
+            var regex = new Regex(Regex.Escape(oldCharSeq));
+            return regex.Replace(textToParse, newCharSeq, 1);
         }
         private void ThrowInvalidCommand(Dictionary<string,IUserOrder> agendaCommands)
         {
             Console.WriteLine("Error, porfavor inserte un comando valido\nCOMANDOS:");
-            foreach (string comand in agendaCommands.Keys)
+            foreach (string validCommand in agendaCommands.Keys)
             {
-                Console.WriteLine(comand);
+                Console.WriteLine(validCommand);
             }
         }
     }

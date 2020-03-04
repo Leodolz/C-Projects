@@ -7,11 +7,11 @@ namespace AgendaApp
         static void Main(string[] args)
         {
             GeneralUserInterpreter userInterpreter = new GeneralUserInterpreter();
-            Console.WriteLine("Agenda Software:\nComandos:\nADD\nSHOW\nREMOVE\nESC");
+            Console.WriteLine("Agenda App:\nValid Commands:\nADD\nSHOW\nREMOVE\nESC");
             while (true)
             {
                 string userCommandEntry = Console.ReadLine();
-                userInterpreter.InterpretCommand(userCommandEntry);
+                userInterpreter.ParseUserCommand(userCommandEntry);
             }
         }
     }

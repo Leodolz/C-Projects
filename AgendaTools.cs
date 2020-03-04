@@ -8,13 +8,13 @@ namespace AgendaApp
     public static class AgendaTools
     {
 
-        public static ArrayList SortbyDate(string sortingDate, Dictionary<int, AgendaEntry> agenda)
+        public static ArrayList FilterbyDate(string sortingDate, Dictionary<int, AgendaEntry> userAgenda)
         {
             ArrayList filteredEntryList = new ArrayList();
-            DateTime sortingDateTime = Validators.getDateTime(sortingDate.Trim());
-            foreach (KeyValuePair<int, AgendaEntry> agendaEntry in agenda)
+            DateTime sortingDateTime = Validators.GetDateTime(sortingDate.Trim());
+            foreach (KeyValuePair<int, AgendaEntry> agendaEntry in userAgenda)
             {
-                DateTime entryDateTime = Validators.getDateTime(agendaEntry.Value.date.Trim());
+                DateTime entryDateTime = Validators.GetDateTime(agendaEntry.Value.date.Trim());
                 if (entryDateTime.Date == sortingDateTime.Date)
                     filteredEntryList.Add(agendaEntry.Value);
             }

@@ -14,8 +14,8 @@ namespace AgendaApp
         }
         public void ExecuteTask(string userEntry)
         {
-            string[] userEntryAttributes = userEntry.Split(" ");
-            IUserOrder agendaAdd = GetAddCommand(userEntryAttributes, agendaController);
+            string[] userEntryValues = userEntry.Split(" ");
+            IUserOrder agendaAdd = GetAddCommand(userEntryValues, agendaController);
             if (agendaAdd != null)
                 agendaAdd.ExecuteTask(userEntry);
             else Console.WriteLine("Formato invalido, vuelva a intentar");

@@ -17,9 +17,9 @@ namespace AgendaApp
 
         private void ValidateCommand(string[] entryAttributes)
         {
-            if (Validators.isValidTime(entryAttributes[0])) //It's time first
+            if (Validators.IsValidTime(entryAttributes[0])) //It's time first
                 agendaController.AddEntry(entryAttributes[1], string.Empty, entryAttributes[0]);
-            else if (Validators.isValidDate(entryAttributes[0])) //It's date first
+            else if (Validators.IsValidDate(entryAttributes[0])) //It's date first
                 agendaController.AddEntry(entryAttributes[1], entryAttributes[0]);
             else Console.WriteLine("Comando invalido, intente de nuevo puede usar un formato de: <Fecha> <Texto> o de <Hora> <Texto>");
         }
