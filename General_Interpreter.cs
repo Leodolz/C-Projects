@@ -29,7 +29,7 @@ namespace AgendaApp
                     return;
                 }
             }
-            throwInvalidCommand(agendaCommands);
+            ThrowInvalidCommand(agendaCommands);
         }
        
         private string ReplaceOnce(string texto,string viejoReg,string nuevoReg)
@@ -37,7 +37,7 @@ namespace AgendaApp
             var regex = new Regex(Regex.Escape(viejoReg));
             return regex.Replace(texto, nuevoReg, 1);
         }
-        private void throwInvalidCommand(Dictionary<string,IOrder> agendaCommands)
+        private void ThrowInvalidCommand(Dictionary<string,IOrder> agendaCommands)
         {
             Console.WriteLine("Error, porfavor inserte un comando valido\nCOMANDOS:");
             foreach (string comando in agendaCommands.Keys)
