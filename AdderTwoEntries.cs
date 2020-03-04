@@ -3,24 +3,24 @@
 
 namespace AgendaApp
 {
-    class AdderTwoEntries : IOrder
+    class AdderTwoEntries : IUserOrder
     {
-        AgendaController controller;
-        public AdderTwoEntries(AgendaController controller)
+        AgendaController agendaController;
+        public AdderTwoEntries(AgendaController agendaController)
         {
-            this.controller = controller;
+            this.agendaController = agendaController;
         }
-        public void ExecuteTask(string text)
+        public void ExecuteTask(string entryTextCommand)
         {
-            validateCommand(text.Split(" "));
+            ValidateCommand(entryTextCommand.Split(" "));
         }
 
-        private void validateCommand(string[] dateOrTime)
+        private void ValidateCommand(string[] entryAttributes)
         {
-            if (Validators.isValidTime(dateOrTime[0])) //It's time first
-                controller.AddEntry(dateOrTime[1], string.Empty, dateOrTime[0]);
-            else if (Validators.isValidDate(dateOrTime[0])) //It's date first
-                controller.AddEntry(dateOrTime[1], dateOrTime[0]);
+            if (Validators.isValidTime(entryAttributes[0])) //It's time first
+                agendaController.AddEntry(entryAttributes[1], string.Empty, entryAttributes[0]);
+            else if (Validators.isValidDate(entryAttributes[0])) //It's date first
+                agendaController.AddEntry(entryAttributes[1], entryAttributes[0]);
             else Console.WriteLine("Comando invalido, intente de nuevo puede usar un formato de: <Fecha> <Texto> o de <Hora> <Texto>");
         }
         

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AgendaApp
 {
-    class InterpreterOfAdd : IOrder
+    class InterpreterOfAdd : IUserOrder
     {
         private const int ONE_ENTRY = 1;
         private const int TWO_ENTRIES = 2;
@@ -14,16 +12,17 @@ namespace AgendaApp
         {
             this.agendaController = agendaController;
         }
-        public void ExecuteTask(string text)
+        public void ExecuteTask(string userEntry)
         {
-            string userEntry = text;
-            IOrder agendaAdd = CheckAddCommand(userEntry.Split(" "), agendaController);
+            string[] userEntryAttributes = userEntry.Split(" ");
+            IUserOrder agendaAdd = GetAddCommand(userEntryAttributes, agendaController);
             if (agendaAdd != null)
                 agendaAdd.ExecuteTask(userEntry);
+            else Console.WriteLine("Formato invalido, vuelva a intentar");
         }
-        private IOrder CheckAddCommand(string[] userEntry, AgendaController agendaClient)
+        private IUserOrder GetAddCommand(string[] userEntryAttributes, AgendaController agendaClient)
         {
-            switch (userEntry.Length)
+            switch (userEntryAttributes.Length)
             {
                 case ONE_ENTRY:
                     return new AdderOneEntry(agendaClient);
@@ -32,7 +31,6 @@ namespace AgendaApp
                 case THREE_ENTRIES:
                     return new AdderThreeEntries(agendaClient);
                 default:
-                    Console.WriteLine("Formato invalido, vuelva a intentar");
                     return null;
             }
         }

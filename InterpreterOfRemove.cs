@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AgendaApp
 {
-    class InterpreterOfRemove:IOrder
+    class InterpreterOfRemove:IUserOrder
     {
-        AgendaController agendaClient;
-        public InterpreterOfRemove(AgendaController agendaClient)
+        AgendaController agendaController;
+        public InterpreterOfRemove(AgendaController agendaController)
         {
-            this.agendaClient = agendaClient;
+            this.agendaController = agendaController;
         }
 
-        public void ExecuteTask(string text)
+        public void ExecuteTask(string idEntry)
         {
-            string idEntry = text;
             int id;
             if (int.TryParse(idEntry, out id))
-                agendaClient.RemoveEntry(id);
+                agendaController.RemoveEntry(id);
             else Console.WriteLine("Comando invalido, por favor intente de nuevo");
         }
     }

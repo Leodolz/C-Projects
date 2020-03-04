@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AgendaApp
 {
-    class InterpreterOfShow:IOrder
+    class InterpreterOfShow:IUserOrder
     {
         AgendaController agendaController;
         public InterpreterOfShow(AgendaController agendaController)
@@ -12,12 +10,11 @@ namespace AgendaApp
             this.agendaController = agendaController;
         }
 
-        public void ExecuteTask(string text)
+        public void ExecuteTask(string showDate)
         {
-            string date = text;
-            date = AgendaTools.putDateIfNecessary(date);
-            if (Validators.isValidDate(date.Trim()))
-                agendaController.ShowEntries(date);
+            showDate = AgendaTools.PutDateIfNecessary(showDate);
+            if (Validators.isValidDate(showDate.Trim()))
+                agendaController.ShowEntries(showDate);
             else Console.WriteLine("Formato Erroneo, por favor intente de nuevo");
         }
     }

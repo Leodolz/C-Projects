@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AgendaApp
 {
-    class InterpreterOfEscape : IOrder
+    class InterpreterOfEscape : IUserOrder
     {
         public void ExecuteTask(string text)
         {

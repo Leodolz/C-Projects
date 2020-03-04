@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
 namespace AgendaApp
 {
@@ -11,29 +10,29 @@ namespace AgendaApp
 
         public static ArrayList SortbyDate(string sortingDate, Dictionary<int, AgendaEntry> agenda)
         {
-            ArrayList filtered = new ArrayList();
+            ArrayList filteredEntryList = new ArrayList();
             DateTime sortingDateTime = Validators.getDateTime(sortingDate.Trim());
-            foreach (KeyValuePair<int, AgendaEntry> entry in agenda)
+            foreach (KeyValuePair<int, AgendaEntry> agendaEntry in agenda)
             {
-                DateTime entryDateTime = Validators.getDateTime(entry.Value.date.Trim());
+                DateTime entryDateTime = Validators.getDateTime(agendaEntry.Value.date.Trim());
                 if (entryDateTime.Date == sortingDateTime.Date)
-                    filtered.Add(entry.Value);
+                    filteredEntryList.Add(agendaEntry.Value);
             }
-            return filtered;
+            return filteredEntryList;
         }
-        public static string BuildEntryMessage(AgendaEntry entry)
+        public static string BuildEntryShowingMessage(AgendaEntry agendaEntry)
         {
-            string text = " Texto: " + entry.text + " ";
-            string time = string.Empty;
-            if (!entry.time.Equals(string.Empty))
-                time = "Hora: " + entry.time + " ";
-            return "Fecha: " + entry.date + text + time + "ID: " + (entry.ID);
+            string showingText = " Texto: " + agendaEntry.text + " ";
+            string showingTime = string.Empty;
+            if (!agendaEntry.time.Equals(string.Empty))
+                showingTime = "Hora: " + agendaEntry.time + " ";
+            return "Fecha: " + agendaEntry.date + showingText + showingTime + "ID: " + (agendaEntry.ID);
         }
-        public static string putDateIfNecessary(string date)
+        public static string PutDateIfNecessary(string entryDate)
         {
-            if (date.Trim().Equals(string.Empty))
+            if (entryDate.Trim().Equals(string.Empty))
                 return DateTime.Today.Date.ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
-            else return date;
+            else return entryDate;
         }
     }
 }

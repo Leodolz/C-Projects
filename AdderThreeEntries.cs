@@ -4,18 +4,18 @@ using System.Text;
 
 namespace AgendaApp
 {
-    class AdderThreeEntries : IOrder
+    class AdderThreeEntries : IUserOrder
     {
-        AgendaController controller;
-        public AdderThreeEntries(AgendaController controller)
+        AgendaController agendaController;
+        public AdderThreeEntries(AgendaController agendaController)
         {
-            this.controller = controller;
+            this.agendaController = agendaController;
         }
-        public void ExecuteTask(string text)
+        public void ExecuteTask(string userEntries)
         {
-            string[] commands = text.Split(" ");
-            if (Validators.isValidDate(commands[0]) && Validators.isValidTime(commands[1]))
-                controller.AddEntry(commands[2], commands[0], commands[1]);
+            string[] controllerCommands = userEntries.Split(" ");
+            if (Validators.isValidDate(controllerCommands[0]) && Validators.isValidTime(controllerCommands[1]))
+                agendaController.AddEntry(controllerCommands[2], controllerCommands[0], controllerCommands[1]);
             else Console.WriteLine("Formato invalido... Debe considerar un formato de: <Fecha> <Hora> <Texto>");
         }
     }

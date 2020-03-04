@@ -4,16 +4,16 @@ using System.Text;
 
 namespace AgendaApp
 {
-    class AdderOneEntry : IOrder
+    class AdderOneEntry : IUserOrder
     {
-        AgendaController controller;
-        public AdderOneEntry(AgendaController controller)
+        AgendaController agendaController;
+        public AdderOneEntry(AgendaController agendaController)
         {
-            this.controller = controller;
+            this.agendaController = agendaController;
         }
-        public void ExecuteTask(string text)
+        public void ExecuteTask(string entryText)
         {
-            controller.AddEntry(text);
+            agendaController.AddEntry(entryText);
         }
     }
 }

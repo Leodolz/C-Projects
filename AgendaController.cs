@@ -7,24 +7,24 @@ namespace AgendaApp
     public class AgendaController
     {
         Dictionary<int, AgendaEntry> agenda = new Dictionary<int,AgendaEntry>();
-        int ID = 1;
-        public void AddEntry(string text, string date="", string time="")
+        int entryID = 1;
+        public void AddEntry(string entryText, string entryDate="", string entryTime="")
         {
-            date = AgendaTools.putDateIfNecessary(date);
-            agenda.Add(ID,new AgendaEntry(text, date, time,ID));
-            ID++;
+            entryDate = AgendaTools.PutDateIfNecessary(entryDate);
+            agenda.Add(entryID,new AgendaEntry(entryText, entryDate, entryTime,entryID));
+            entryID++;
             Console.WriteLine("Texto ingresado correctamente");
         }
-        public void ShowEntries(string date)
+        public void ShowEntries(string entryDate)
         {
-            foreach (AgendaEntry entry in AgendaTools.SortbyDate(date,agenda))
+            foreach (AgendaEntry entry in AgendaTools.SortbyDate(entryDate,agenda))
             {
-                Console.WriteLine(AgendaTools.BuildEntryMessage(entry));
+                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(entry));
             }
         }
-        public void RemoveEntry(int id)
+        public void RemoveEntry(int entryID)
         {
-            if (agenda.Remove(id))
+            if (agenda.Remove(entryID))
                 Console.WriteLine("Entrada eliminada con exito");
             else Console.WriteLine("No existe entrada con dicho ID");
         }
