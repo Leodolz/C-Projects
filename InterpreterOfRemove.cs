@@ -12,9 +12,9 @@ namespace AgendaApp
 
         public void ExecuteTask(string idEntry)
         {
-            int id;
-            if (int.TryParse(idEntry, out id))
-                agendaController.RemoveEntry(id);
+            int parsedId;
+            if (int.TryParse(idEntry, out parsedId))
+                agendaController.RemoveEntry(parsedId);
             else Console.WriteLine("Comando invalido, por favor intente de nuevo");
         }
     }
