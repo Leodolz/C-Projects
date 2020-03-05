@@ -14,10 +14,10 @@ namespace AgendaApp
         }
         public void ExecuteTask(string entryText)
         {
-            ArrayList showEntries = FilterByText(entryText, agendaController.GetAgenda());
-            foreach (AgendaEntry showingEntry in showEntries)
+            ArrayList entriesToShow = FilterByText(entryText, agendaController.GetAgenda());
+            foreach (AgendaEntry entry in entriesToShow)
             {
-                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(showingEntry));
+                Console.WriteLine(AgendaTools.BuildEntryShowingMessage(entry));
             }
         }
         private ArrayList FilterByText(string filteringText, Dictionary<int, AgendaEntry> userAgenda)

@@ -34,10 +34,10 @@ namespace AgendaApp
             ThrowInvalidCommandError(AgendaValidCommands);
         }
        
-        private string ReplaceTextOnce(string textToParse,string oldCharSeq,string newCharSeq)
+        private string ReplaceTextOnce(string textToModify,string oldCharSeq,string newCharSeq)
         {
             var regex = new Regex(Regex.Escape(oldCharSeq));
-            return regex.Replace(textToParse, newCharSeq, 1);
+            return regex.Replace(textToModify, newCharSeq, 1);
         }
         private void ThrowInvalidCommandError(Dictionary<string,IUserOrder> agendaValidCommands)
         {

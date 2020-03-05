@@ -11,9 +11,9 @@ namespace AgendaApp
         {
             this.agendaController = agendaController;
         }
-        public void ExecuteTask(string userEntries)
+        public void ExecuteTask(string userEntry)
         {
-            string[] controllerCommands = userEntries.Split(" ");
+            string[] controllerCommands = userEntry.Split(" ");
             string entryText = controllerCommands[2]; string entryDate = controllerCommands[0]; string entryTime = controllerCommands[1];
             if (Validators.IsValidDate(entryDate) && Validators.IsValidTime(entryTime))
                 agendaController.AddEntry(entryText, entryDate, entryTime);
