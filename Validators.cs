@@ -9,8 +9,7 @@ namespace AgendaApp
         private static string[] localeDateFormats = CultureInfo.CurrentCulture.DateTimeFormat.GetAllDateTimePatterns();
         public static bool IsValidDate(string dateEntry)
         {
-            DateTime parsedDate;
-            return DateTime.TryParseExact(dateEntry, localeDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate);
+            return DateTime.TryParseExact(dateEntry, localeDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate);
         }
         public static bool IsValidTime(string timeEntry)
         {

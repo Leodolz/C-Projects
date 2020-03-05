@@ -7,7 +7,7 @@ namespace AgendaApp
         private const int ONE_ENTRY = 1;
         private const int TWO_ENTRIES = 2;
         private const int THREE_ENTRIES = 3;
-        AgendaController agendaController;
+        readonly AgendaController agendaController;
         public InterpreterOfAdd(AgendaController agendaController)
         {
             this.agendaController = agendaController;
@@ -15,9 +15,9 @@ namespace AgendaApp
         public void ExecuteTask(string userEntry)
         {
             int numberEntryValues = userEntry.Split(" ").Length;
-            IUserOrder agendaAdd = GetAddCommand(numberEntryValues, agendaController);
-            if (agendaAdd != null)
-                agendaAdd.ExecuteTask(userEntry);
+            IUserOrder agendaAddCommand = GetAddCommand(numberEntryValues, agendaController);
+            if (agendaAddCommand != null)
+                agendaAddCommand.ExecuteTask(userEntry);
             else Console.WriteLine("Formato invalido, vuelva a intentar");
         }
         private IUserOrder GetAddCommand(int numberEntryValues, AgendaController agendaClient)
